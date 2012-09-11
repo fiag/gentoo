@@ -1,0 +1,2 @@
+* version bump to 3.0.4.6, but compile failed. missing UnitTests sources.
+* live ebuild works, but also compile failed.

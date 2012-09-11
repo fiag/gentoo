@@ -1,0 +1,25 @@
+diff -ruN monodevelop-3.0.4.6/configure.in monodevelop-3.0.4.6_new/configure.in
+--- monodevelop-3.0.4.6/configure.in	2012-09-07 05:27:21.000000000 +0800
++++ monodevelop-3.0.4.6_new/configure.in	2012-09-11 16:10:50.166270752 +0800
+@@ -341,10 +341,6 @@
+ src/addins/MonoDevelop.DocFood/Makefile
+ src/addins/MonoDevelop.MacDev/Makefile
+ tests/Makefile
+-tests/UnitTests/Makefile
+-tests/UserInterfaceTests/Makefile
+-tests/MonoDevelop.MacDev.Tests/Makefile
+-tests/MacPlatform.Tests/Makefile
+ Makefile
+ monodevelop
+ mdtool
+diff -ruN monodevelop-3.0.4.6/src/addins/MonoDevelop.Debugger/MonoDevelop.Debugger.Tests/DebugTests.cs monodevelop-3.0.4.6_new/src/addins/MonoDevelop.Debugger/MonoDevelop.Debugger.Tests/DebugTests.cs
+--- monodevelop-3.0.4.6/src/addins/MonoDevelop.Debugger/MonoDevelop.Debugger.Tests/DebugTests.cs	2012-09-07 05:27:17.000000000 +0800
++++ monodevelop-3.0.4.6_new/src/addins/MonoDevelop.Debugger/MonoDevelop.Debugger.Tests/DebugTests.cs	2012-09-11 16:10:31.382271700 +0800
+@@ -26,7 +26,6 @@
+ 
+ using System;
+ using NUnit.Framework;
+-using UnitTests;
+ using Mono.Debugging.Client;
+ using MonoDevelop.Core;
+ using MonoDevelop.Core.Execution;
