@@ -75,6 +75,11 @@ HTTP_LUA_MODULE_SHA1="db0bebe"
 HTTP_LUA_MODULE_URI="https://github.com/chaoslawful/lua-nginx-module/tarball/v${HTTP_LUA_MODULE_PV}"
 HTTP_LUA_MODULE_WD="${WORKDIR}/chaoslawful-lua-nginx-module-${HTTP_LUA_MODULE_SHA1}"
 
+# spdy (http://nginx.org/patches/spdy/, BSD license)
+SPDY_PATCH_PV="52"
+SPDY_PATCH_P="patch.spdy-${SPDY_PATCH_PV}"
+SPDY_PATCH_URI="http://nginx.org/patches/spdy/${SPDY_PATCH_P}.txt"
+
 inherit eutils ssl-cert toolchain-funcs perl-module flag-o-matic user
 
 DESCRIPTION="Robust, small and high performance http and reverse proxy server"
@@ -88,7 +93,8 @@ SRC_URI="http://nginx.org/download/${P}.tar.gz
 	nginx_modules_http_upload? ( ${HTTP_UPLOAD_MODULE_URI} )
 	nginx_modules_http_slowfs_cache? ( ${HTTP_SLOWFS_CACHE_MODULE_URI} )
 	nginx_modules_http_fancyindex? ( ${HTTP_FANCYINDEX_MODULE_URI} -> ${HTTP_FANCYINDEX_MODULE_P}.tar.gz )
-	nginx_modules_http_lua? ( ${HTTP_LUA_MODULE_URI} -> ${HTTP_LUA_MODULE_P}.tar.gz )"
+	nginx_modules_http_lua? ( ${HTTP_LUA_MODULE_URI} -> ${HTTP_LUA_MODULE_P}.tar.gz )
+	spdy? ( ${SPDY_PATCH_URI} )"
 
 LICENSE="as-is BSD BSD-2 GPL-2 MIT"
 SLOT="0"
@@ -111,8 +117,7 @@ NGINX_MODULES_3RD="
 	http_fancyindex
 	http_lua"
 
-IUSE="aio debug +http +http-cache ipv6 libatomic +pcre pcre-jit selinux ssl
-vim-syntax spdy"
+IUSE="aio debug +http +http-cache ipv6 libatomic +pcre pcre-jit selinux spdy ssl vim-syntax"
 
 for mod in $NGINX_MODULES_STD; do
 	IUSE="${IUSE} +nginx_modules_http_${mod}"
@@ -206,7 +211,7 @@ src_prepare() {
 	# remove useless files
 	sed -i -e '/koi-/d' -e '/win-/d' auto/install || die
 	if use spdy; then
-		epatch "${FILESDIR}/patch.spdy-52.txt"
+		epatch "${DISTDIR}/${SPDY_PATCH_P}.txt"
 	fi
 }
 
